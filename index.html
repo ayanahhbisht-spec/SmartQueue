@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartQueue — Queue Management, Reimagined</title>
+  <title>SmartQueue — Queue Management & Emergency Triage</title>
   <meta name="description"
-    content="Book your appointment, track your live position in line, and see your estimated wait time update in real time with SmartQueue.">
+    content="Book your appointment, track your live position in line, and manage emergency triage with SmartQueue.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,7 +18,7 @@
 <body>
   <div class="ambient-bg"></div>
 
-  <!-- PAGE: LOGIN -->
+  <!-- PAGE: LOGIN (DEFAULT LANDING PAGE) -->
   <div class="page active" id="page-login">
     <div class="auth-container">
       <div class="auth-left">
@@ -27,7 +27,8 @@
           <span class="brand-text">SmartQueue</span>
         </div>
         <h1 class="auth-headline">Skip the wait.<br><span class="serif-italic">Join the future.</span></h1>
-        <p class="auth-tagline">Real-time queue tracking, instant appointments, and priority access — all in one place.</p>
+        <p class="auth-tagline">Real-time queue tracking, instant appointments, and priority emergency access — all in
+          one place.</p>
         <div class="auth-features">
           <div class="auth-feature-item"><span class="feat-icon">🎫</span><span>Instant token generation</span></div>
           <div class="auth-feature-item"><span class="feat-icon">📡</span><span>Live queue tracking</span></div>
@@ -47,15 +48,17 @@
             <p>Sign in to your SmartQueue account</p>
           </div>
 
+          <div class="auth-error-banner hidden" id="loginErrorMsg"></div>
+
           <form id="loginForm" class="auth-form">
             <div class="form-group">
               <label for="loginEmail" class="form-label">Email address</label>
-              <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" value="sarah@example.com" required>
+              <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
               <label for="loginPassword" class="form-label">Password</label>
               <div class="password-wrapper">
-                <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" value="password123" required>
+                <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
                 <button type="button" class="pwd-toggle" id="loginPwdToggle">&#128065;</button>
               </div>
             </div>
@@ -69,7 +72,7 @@
             </div>
             <button type="submit" class="btn btn-primary btn-full" id="loginSubmitBtn">
               <span class="btn-text">Sign In</span>
-              <span class="btn-loader hidden" id="loginLoader">Loading...</span>
+              <span class="btn-loader hidden" id="loginLoader">Processing...</span>
             </button>
           </form>
 
@@ -80,14 +83,14 @@
           </button>
 
           <div class="auth-footer-link">
-            Don't have an account? <button class="link-btn" id="goToGetAccess">Get access</button>
+            Don't have an account? <button class="link-btn" id="goToGetAccess">Sign up</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PAGE: GET ACCESS (REGISTER) -->
+  <!-- PAGE: SIGN UP / REGISTER -->
   <div class="page" id="page-getaccess">
     <div class="auth-container">
       <div class="auth-left">
@@ -96,16 +99,20 @@
           <span class="brand-text">SmartQueue</span>
         </div>
         <h1 class="auth-headline">Get your<br><span class="serif-italic">access pass.</span></h1>
-        <p class="auth-tagline">Join thousands of patients who never wait in a physical line again.</p>
+        <p class="auth-tagline">Join thousands of patients and clinical staff who never wait in a physical line again.
+        </p>
         <div class="auth-features">
-          <div class="auth-feature-item"><span class="feat-icon">&#10003;</span><span>Free forever for patients</span></div>
-          <div class="auth-feature-item"><span class="feat-icon">&#128276;</span><span>SMS and push alerts</span></div>
-          <div class="auth-feature-item"><span class="feat-icon">&#8635;</span><span>Easy rescheduling</span></div>
+          <div class="auth-feature-item"><span class="feat-icon">&#10003;</span><span>Free forever for patients</span>
+          </div>
+          <div class="auth-feature-item"><span class="feat-icon">&#128276;</span><span>SMS & push alerts</span></div>
+          <div class="auth-feature-item"><span class="feat-icon">&#8635;</span><span>Role-based access dashboard</span>
+          </div>
         </div>
         <div class="auth-stats-row">
           <div class="auth-stat"><span class="stat-num">12k+</span><span class="stat-label">Active users</span></div>
           <div class="auth-stat"><span class="stat-num">98%</span><span class="stat-label">Satisfaction</span></div>
-          <div class="auth-stat"><span class="stat-num">4.9&#9733;</span><span class="stat-label">App rating</span></div>
+          <div class="auth-stat"><span class="stat-num">4.9&#9733;</span><span class="stat-label">App rating</span>
+          </div>
         </div>
       </div>
 
@@ -116,7 +123,10 @@
             <p>Start skipping queues in 60 seconds</p>
           </div>
 
+          <div class="auth-error-banner hidden" id="registerErrorMsg"></div>
+
           <form id="registerForm" class="auth-form">
+
             <div class="form-row">
               <div class="form-group">
                 <label for="regFirstName" class="form-label">First name</label>
@@ -147,24 +157,25 @@
               <label class="checkbox-container">
                 <input type="checkbox" id="agreeTerms" required>
                 <span class="custom-checkbox"></span>
-                <span class="checkbox-label-text">I agree to the <a href="#" class="link-sm">Terms of Service</a> and <a href="#" class="link-sm">Privacy Policy</a></span>
+                <span class="checkbox-label-text">I agree to the <a href="#" class="link-sm">Terms of Service</a> and <a
+                    href="#" class="link-sm">Privacy Policy</a></span>
               </label>
             </div>
             <button type="submit" class="btn btn-primary btn-full" id="registerSubmitBtn">
               <span class="btn-text">Create Account and Get Access</span>
-              <span class="btn-loader hidden" id="registerLoader">Loading...</span>
+              <span class="btn-loader hidden" id="registerLoader">Processing...</span>
             </button>
           </form>
 
           <div class="auth-footer-link">
-            Already have an account? <button class="link-btn" id="goToLogin">Sign in</button>
+            Already have an account? <button class="link-btn" id="goToLogin">Login</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PAGE: DASHBOARD -->
+  <!-- PAGE: USER DASHBOARD -->
   <div class="page" id="page-dashboard">
     <header class="navbar" id="navbar">
       <div class="nav-container">
@@ -188,6 +199,27 @@
     </header>
 
     <main class="page-container">
+
+      <!-- Peak Hours Banner Section for Users -->
+      <div class="peak-hours-card" id="userPeakHoursCard">
+        <div class="peak-card-left">
+          <div class="peak-icon-badge">⏰</div>
+          <div class="peak-text-content">
+            <div class="peak-title-row">
+              <span class="peak-label">Clinic Traffic Insights</span>
+              <span class="peak-badge" id="userPeakTimeDisplay">Peak Hours: 11 AM – 1 PM</span>
+            </div>
+            <p class="peak-description" id="userPeakAdvisory">
+              Waiting times may be longer during peak hours. We advise arriving early or booking off-peak slots to
+              minimize wait.
+            </p>
+          </div>
+        </div>
+        <div class="peak-sync-badge">
+          <span class="sync-dot"></span> Synchronized Live
+        </div>
+      </div>
+
       <section class="hero-section" id="hero">
         <div class="hero-grid">
           <div class="hero-content">
@@ -198,19 +230,13 @@
             </h1>
             <p class="hero-description">
               Book your appointment, track your live position in line, and see your estimated wait time update in real
-              time. Running late or facing an emergency? Reschedule in a tap.
+              time. Running late or facing an emergency? Reschedule or upload emergency proof in a tap.
             </p>
             <div class="hero-actions">
               <button class="btn btn-primary" id="heroBookBtn">Book an appointment</button>
               <a href="#how-it-works" class="btn-link" id="heroLearnMoreBtn">
                 See how it works <span class="arrow-down">&#8595;</span>
               </a>
-            </div>
-            <div class="sim-strip">
-              <span class="sim-label"><span class="live-dot"></span> Live Queue Simulator:</span>
-              <button class="sim-chip-btn" id="simNextPatientBtn">Next Patient Called</button>
-              <button class="sim-chip-btn" id="simAutoPlayBtn">&#9654; Auto-Play</button>
-              <button class="sim-chip-btn" id="simResetQueueBtn">&#8634; Reset</button>
             </div>
           </div>
 
@@ -282,7 +308,8 @@
           <div class="step-card" id="stepCardAdapt">
             <div class="step-overline">ADAPT</div>
             <h3 class="step-title">Handle the unexpected</h3>
-            <p class="step-description">Flag an emergency to get bumped up, or reschedule instantly.</p>
+            <p class="step-description">Flag an emergency with photo proof to get bumped up, or reschedule instantly.
+            </p>
             <button class="step-action-link" id="stepAdaptAction">Test reschedule options &#8595;</button>
           </div>
         </div>
@@ -294,8 +321,8 @@
             <div class="urgent-overline">FOR URGENT CASES</div>
             <h2 class="urgent-headline">Emergencies shouldn't wait in line.</h2>
             <p class="urgent-description">
-              Mark your case as priority and SmartQueue automatically re-slots you as close to the front as fairly
-              possible, without cancelling anyone else's appointment.
+              Mark your case as priority, upload optional photo proof, and SmartQueue automatically re-slots you near
+              the front of the line.
             </p>
             <button class="btn btn-primary" id="requestPriorityBtn">Request priority access</button>
             <div class="triage-disclaimer">
@@ -305,7 +332,11 @@
           <div class="urgent-right-col">
             <div class="urgent-alert-banner" id="urgentAlertBanner">
               <span class="urgent-bell-icon">&#128276;</span>
-              <span class="urgent-alert-text" id="urgentAlertText">Priority requested — moved to position 2</span>
+              <div style="flex-grow: 1;">
+                <span class="urgent-alert-text" id="urgentAlertText">No new notifications</span>
+                <div id="notificationList"
+                  style="margin-top: 0.5rem; font-size: 0.85rem; max-height: 200px; overflow-y: auto;"></div>
+              </div>
             </div>
             <div class="missed-slots-card" id="missedSlotsCard">
               <div class="missed-overline">FOR MISSED SLOTS</div>
@@ -313,11 +344,18 @@
               <p class="missed-description">
                 Choose to come back in a few minutes, a few hours, another day — or cancel outright.
               </p>
-              <div class="reschedule-pills-row" id="rescheduleOptionsRow">
-                <button class="pill-btn pill-green" data-reschedule="30m" id="reschedule30m">In 30 min</button>
-                <button class="pill-btn pill-blue" data-reschedule="2h" id="reschedule2h">In 2 hrs</button>
-                <button class="pill-btn pill-yellow" data-reschedule="tomorrow" id="rescheduleTomorrow">Tomorrow</button>
-                <button class="pill-btn pill-red" data-reschedule="cancel" id="rescheduleCancel">Cancel</button>
+              <div class="reschedule-custom-duration" id="rescheduleOptionsRow">
+                <div class="form-group" style="position: relative; margin-bottom: 0;">
+                  <label class="form-label" style="font-size: 0.85rem">Choose your wait time</label>
+                  <input type="text" id="rescheduleDurationInput" class="form-input" placeholder="Select duration..."
+                    readonly style="cursor: pointer;">
+                  <div id="rescheduleWheelContainer" class="wheel-container hidden">
+                    <div class="wheel-highlight"></div>
+                    <ul class="wheel-list" id="rescheduleWheelList"></ul>
+                  </div>
+                </div>
+                <button class="btn btn-primary" id="confirmRescheduleBtn" style="margin-top: 1rem; width: 100%;">Confirm
+                  Reschedule</button>
               </div>
               <div class="reschedule-status-msg" id="rescheduleStatusMsg">
                 <span>&#10003; Click any option to simulate instant smart slot reassignment</span>
@@ -343,6 +381,227 @@
     <button class="help-fab" id="helpFab" title="Help and Queue Information" aria-label="Help">?</button>
   </div>
 
+  <!-- PAGE: SEPARATE DOCTOR DASHBOARD -->
+  <div class="page" id="page-doctor-dashboard">
+    <header class="navbar admin-navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-brand">
+          <div class="brand-icon admin-brand-icon"><span>Q</span></div>
+          <span class="brand-text">SmartQueue <span class="admin-nav-tag">DOCTOR</span></span>
+        </a>
+        <div class="nav-links">
+          <span class="live-status-pill"><span class="live-dot"></span> Live Queue Engine</span>
+          <div class="nav-user-pill">
+            <span class="user-avatar admin-avatar" id="doctorUserAvatar">D</span>
+            <span id="doctorUserName">Doctor</span>
+            <button class="nav-btn ghost-btn small-btn" id="doctorLogoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="dashboard-main admin-main" style="max-width: 1000px; margin: 0 auto; padding: 2rem;">
+      <div class="admin-header-row">
+        <div>
+          <h1 class="admin-page-title">Doctor Consultation Dashboard</h1>
+          <p class="admin-page-subtitle">Manage your active queue and current patient consultation.</p>
+        </div>
+        <button class="btn btn-ghost" id="doctorRefreshBtn">🔄 Refresh Data</button>
+      </div>
+      
+      <div class="grid" style="grid-template-columns: 1fr; gap: 2rem;">
+        
+        <!-- Currently Called Patient -->
+        <div class="admin-panel" style="border-left: 4px solid var(--color-primary);">
+          <div class="panel-header">
+            <h2 class="panel-title">Currently Called Patient</h2>
+            <span class="badge" id="doctorCurrentTokenType">No Active Patient</span>
+          </div>
+          <div class="panel-content" id="doctorCurrentPatientContainer">
+             <div style="text-align:center; padding: 2rem; color: var(--color-text-muted);">
+               No patient is currently in consultation. Click "Call Next Patient" to begin.
+             </div>
+          </div>
+          <div class="panel-actions" style="margin-top: 1rem; display: flex; gap: 1rem;" id="doctorCurrentActions">
+            <button class="btn btn-primary" id="doctorCallNextBtn" style="flex: 1;">Call Next Patient</button>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+  <!-- PAGE: SEPARATE ADMIN DASHBOARD -->
+  <div class="page" id="page-admin-dashboard">
+    <header class="navbar admin-navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-brand">
+          <div class="brand-icon admin-brand-icon"><span>Q</span></div>
+          <span class="brand-text">SmartQueue <span class="admin-nav-tag">ADMIN</span></span>
+        </a>
+        <div class="nav-links">
+          <span class="live-status-pill"><span class="live-dot"></span> Live Queue Engine</span>
+          <div class="nav-user-pill">
+            <span class="user-avatar admin-avatar" id="adminUserAvatar">A</span>
+            <span id="adminUserName">Administrator</span>
+            <button class="nav-btn ghost-btn small-btn" id="adminLogoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-container admin-container">
+      <div class="admin-header-row">
+        <div>
+          <h1 class="admin-page-title">Clinic Control & Triage Center</h1>
+          <p class="admin-page-subtitle">Real-time performance analytics, emergency requests, and queue status
+            management.</p>
+        </div>
+        <button class="btn btn-ghost" id="adminRefreshBtn">🔄 Refresh Data</button>
+      </div>
+
+      <!-- SECTION A: TODAY'S PERFORMANCE -->
+      <section class="admin-section">
+        <h2 class="section-title">Today's Performance</h2>
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Total Patients</span>
+              <span class="stat-card-icon">👥</span>
+            </div>
+            <div class="stat-card-value" id="adminStatPatients">--</div>
+            <div class="stat-card-footer">Registered in clinic queue</div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Avg Waiting Time</span>
+              <span class="stat-card-icon">⏱️</span>
+            </div>
+            <div class="stat-card-value" id="adminStatAvgWait">-- mins</div>
+            <div class="stat-card-footer">Calculated throughput pace</div>
+          </div>
+
+          <div class="admin-stat-card urgent-stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Emergency Cases</span>
+              <span class="stat-card-icon">🚨</span>
+            </div>
+            <div class="stat-card-value" id="adminStatEmergencies">--</div>
+            <div class="stat-card-footer">Priority triage requested</div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">No-Shows / Cancelled</span>
+              <span class="stat-card-icon">⚠️</span>
+            </div>
+            <div class="stat-card-value" id="adminStatNoShows">--</div>
+            <div class="stat-card-footer">Slots released without delay</div>
+          </div>
+
+          <div class="admin-stat-card highlight-stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Peak Time</span>
+              <span class="stat-card-icon">📊</span>
+            </div>
+            <div class="stat-card-value peak-val" id="adminStatPeakTime">--</div>
+            <div class="stat-card-footer">Calculated highest arrival window</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION B: PENDING PRIORITY REQUESTS -->
+      <section class="admin-section pending-section" id="adminPendingSection">
+        <div class="pending-section-header">
+          <h2 class="section-title">🚨 Pending Priority Requests</h2>
+          <span class="pending-count-badge" id="pendingRequestsCount">0 Pending Review</span>
+        </div>
+        <div class="pending-requests-grid" id="adminPendingRequestsContainer">
+          <!-- Dynamically populated via JS -->
+        </div>
+        <div class="admin-empty-state hidden" id="pendingEmptyState">
+          <span class="empty-icon">✅</span>
+          <p>No pending priority requests awaiting approval.</p>
+        </div>
+      </section>
+
+      <!-- SECTION C: ALL REQUESTS & QUEUE MANAGEMENT -->
+      <section class="admin-section">
+        <div class="admin-filter-bar" style="border-bottom: 2px solid var(--border-card); margin-bottom: 1rem; padding-bottom: 0.5rem;">
+          <h2 class="section-title" style="margin-bottom:0;">Queue Management</h2>
+          <div class="filter-tab-pills" id="adminMasterTabs">
+            <button class="filter-tab active" data-view="active">Active Queue</button>
+            <button class="filter-tab" data-view="history">Patient History</button>
+          </div>
+        </div>
+
+        <!-- ACTIVE QUEUE VIEW -->
+        <div id="adminActiveView">
+          <div class="admin-filter-bar" style="margin-bottom: 1rem;">
+            <input type="text" id="adminActiveSearch" class="form-input" placeholder="Search by name, token, or service..." style="max-width: 300px; padding: 0.4rem 0.8rem; font-size: 0.9rem;">
+            <div class="filter-tab-pills">
+              <button class="sub-filter-tab active" data-filter="all">All Active</button>
+              <button class="sub-filter-tab" data-filter="emergency">🚨 Emergencies Only</button>
+            </div>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Token & ID</th>
+                  <th>Patient Details</th>
+                  <th>Emergency / Reason</th>
+                  <th>Priority</th>
+                  <th>Photo</th>
+                  <th>Position</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminActiveTableBody">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+            <div class="admin-empty-state hidden" id="adminActiveEmptyState">
+              <span class="empty-icon">📋</span>
+              <p>No active patients in the queue.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PATIENT HISTORY VIEW -->
+        <div id="adminHistoryView" class="hidden">
+          <div class="admin-filter-bar" style="margin-bottom: 1rem;">
+            <input type="text" id="adminHistorySearch" class="form-input" placeholder="Search history..." style="max-width: 300px; padding: 0.4rem 0.8rem; font-size: 0.9rem;">
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Token & ID</th>
+                  <th>Patient Name</th>
+                  <th>Department</th>
+                  <th>Type</th>
+                  <th>Final Status</th>
+                  <th>Booking Time</th>
+                  <th>Resolution Time</th>
+                </tr>
+              </thead>
+              <tbody id="adminHistoryTableBody">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+            <div class="admin-empty-state hidden" id="adminHistoryEmptyState">
+              <span class="empty-icon">📂</span>
+              <p>No history records found.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
   <!-- PAGE: BOOK APPOINTMENT -->
   <div class="page" id="page-book">
     <div class="fullpage-layout">
@@ -357,9 +616,11 @@
       <div class="fullpage-content">
         <div class="booking-page-left">
           <div class="modal-badge" style="margin-bottom:1rem;">Instant Registration</div>
-          <h1 class="hero-headline" style="font-size:2.5rem;">Book Your<br><span class="serif-italic">Appointment</span></h1>
-          <p class="hero-description" style="margin-top:1rem;">Join the virtual queue and receive a real-time tracking token instantly. No waiting on hold, no paperwork.</p>
-          
+          <h1 class="hero-headline" style="font-size:2.5rem;">Book Your<br><span class="serif-italic">Appointment</span>
+          </h1>
+          <p class="hero-description" style="margin-top:1rem;">Join the virtual queue and receive a real-time tracking
+            token instantly. Option to upload medical notes or supporting photos.</p>
+
           <div class="booking-info-cards">
             <div class="info-mini-card">
               <span class="info-card-icon">&#9889;</span>
@@ -376,10 +637,10 @@
               </div>
             </div>
             <div class="info-mini-card">
-              <span class="info-card-icon">&#8635;</span>
+              <span class="info-card-icon">📷</span>
               <div>
-                <strong>Easy Reschedule</strong>
-                <p>Change plans without losing your spot</p>
+                <strong>Photo Attachments</strong>
+                <p>Upload prescriptions or condition photos</p>
               </div>
             </div>
           </div>
@@ -391,15 +652,15 @@
               <h2>Appointment Details</h2>
               <p>Fill in your information to join the queue</p>
             </div>
-            <form id="bookingForm" class="auth-form">
+            <form id="bookingForm" class="auth-form" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="patientName" class="form-label">Full Name</label>
-                <input type="text" id="patientName" class="form-input" placeholder="e.g. Sarah Jenkins" required value="Sarah Jenkins">
+                <input type="text" id="patientName" class="form-input" placeholder="Your Full Name" required value="">
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="patientPhone" class="form-label">Phone Number</label>
-                  <input type="tel" id="patientPhone" class="form-input" placeholder="+1 (555) 019-2834" required value="+1 (555) 234-8901">
+                  <input type="tel" id="patientPhone" class="form-input" placeholder="+91 XXXXXXXXXX" required value="">
                 </div>
                 <div class="form-group">
                   <label for="serviceDepartment" class="form-label">Department</label>
@@ -432,6 +693,28 @@
                   </select>
                 </div>
               </div>
+
+              <!-- Booking Photo Upload -->
+              <div class="form-group">
+                <label class="form-label" for="bookingPhotoInput">Upload supporting photo (optional)</label>
+                <div class="file-upload-dropzone" id="bookingPhotoDropzone">
+                  <input type="file" id="bookingPhotoInput" name="photo"
+                    accept="image/jpeg,image/jpg,image/png,image/webp" class="file-input-hidden">
+                  <div class="dropzone-content" id="bookingDropzoneContent">
+                    <span class="upload-icon">📷</span>
+                    <span class="upload-prompt">Choose image or drag & drop</span>
+                    <span class="upload-specs">JPG, PNG, WEBP (Max 5MB)</span>
+                  </div>
+                  <div class="file-preview-container hidden" id="bookingFilePreview">
+                    <img src="" id="bookingPreviewImg" class="preview-img-thumbnail" alt="Selected photo">
+                    <div class="preview-info">
+                      <span id="bookingFileName" class="file-name-text">filename.jpg</span>
+                      <button type="button" class="remove-file-btn" id="bookingRemovePhotoBtn">Remove photo</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="checkbox-container">
                   <input type="checkbox" id="bookWithPriority">
@@ -444,7 +727,8 @@
               </div>
               <div class="modal-actions">
                 <button type="button" class="btn btn-ghost" id="cancelBookingBtn">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="confirmBookingBtn">Generate Token and Join Queue</button>
+                <button type="submit" class="btn btn-primary" id="confirmBookingBtn">Generate Token and Join
+                  Queue</button>
               </div>
             </form>
           </div>
@@ -453,7 +737,7 @@
     </div>
   </div>
 
-  <!-- PAGE: PRIORITY ACCESS -->
+  <!-- PAGE: PRIORITY ACCESS & EMERGENCY REPORTING -->
   <div class="page" id="page-priority">
     <div class="fullpage-layout priority-layout">
       <div class="fullpage-header">
@@ -471,7 +755,7 @@
             Emergencies<br>shouldn't wait <span class="serif-italic">in line.</span>
           </h1>
           <p class="hero-description" style="text-align:center; max-width:600px; margin:1rem auto;">
-            If you are experiencing a medical emergency, SmartQueue will instantly move you to the front of the queue
+            If you are experiencing a medical emergency, SmartQueue will instantly move you near the front of the queue
             verified by clinical triage guidelines.
           </p>
         </div>
@@ -485,60 +769,104 @@
           <div class="priority-info-card">
             <div class="priority-card-icon">&#128737;</div>
             <h3>Triage Verified</h3>
-            <p>Our system applies clinical guidelines to verify and validate priority requests.</p>
+            <p>Our system applies clinical guidelines to verify emergency submissions.</p>
           </div>
           <div class="priority-info-card">
-            <div class="priority-card-icon">&#128101;</div>
-            <h3>Fair to All</h3>
-            <p>Other patients are notified and their positions are shifted respectfully.</p>
+            <div class="priority-card-icon">📷</div>
+            <h3>Photo Verification</h3>
+            <p>Upload optional photos for clinical staff to review in real time.</p>
           </div>
         </div>
 
         <div class="priority-form-card">
           <h3>Request Priority Access</h3>
           <p>Please describe your emergency situation briefly:</p>
-          <form id="priorityForm" class="auth-form" style="margin-top:1.5rem;">
+          <form id="priorityForm" class="auth-form" style="margin-top:1.5rem;" enctype="multipart/form-data">
             <div class="form-group">
               <label class="form-label">Current Token</label>
               <input type="text" class="form-input" id="priorityTokenDisplay" readonly>
             </div>
             <div class="form-group">
               <label class="form-label">Emergency Type</label>
-              <select class="form-select" id="emergencyType">
-                <option value="chest">Chest pain / Cardiac symptoms</option>
-                <option value="breathing">Difficulty breathing</option>
-                <option value="severe_pain">Severe acute pain</option>
-                <option value="injury">Serious injury</option>
-                <option value="allergic">Allergic reaction</option>
-                <option value="neurological">Neurological symptoms</option>
-                <option value="other">Other emergency</option>
+              <select class="form-select" id="emergencyType" name="emergency_type">
+                <option value="Chest pain / Cardiac symptoms">Chest pain / Cardiac symptoms</option>
+                <option value="Difficulty breathing">Difficulty breathing</option>
+                <option value="Severe acute pain">Severe acute pain</option>
+                <option value="Serious injury / Bleeding">Serious injury / Bleeding</option>
+                <option value="Allergic reaction">Allergic reaction</option>
+                <option value="Neurological symptoms">Neurological symptoms</option>
+                <option value="Other emergency">Other emergency</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">Brief Description</label>
-              <textarea class="form-input" id="emergencyDesc" rows="3" placeholder="Describe your symptoms or emergency briefly..."></textarea>
+              <textarea class="form-input" id="emergencyDesc" name="emergency_desc" rows="3"
+                placeholder="Describe your symptoms or emergency briefly..."></textarea>
             </div>
+
+            <!-- Priority Photo Upload Field (Requirement 5) -->
+            <div class="form-group">
+              <label class="form-label" for="priorityPhotoInput">Upload supporting photo (optional)</label>
+              <div class="file-upload-dropzone" id="priorityPhotoDropzone">
+                <input type="file" id="priorityPhotoInput" name="photo"
+                  accept="image/jpeg,image/jpg,image/png,image/webp" class="file-input-hidden">
+                <div class="dropzone-content" id="priorityDropzoneContent">
+                  <span class="upload-icon">📷</span>
+                  <span class="upload-prompt">Click to choose image or drag & drop</span>
+                  <span class="upload-specs">JPG, JPEG, PNG, WEBP (Max 5MB)</span>
+                </div>
+                <div class="file-preview-container hidden" id="priorityFilePreview">
+                  <img src="" id="priorityPreviewImg" class="preview-img-thumbnail" alt="Selected photo">
+                  <div class="preview-info">
+                    <span id="priorityFileName" class="file-name-text">filename.jpg</span>
+                    <button type="button" class="remove-file-btn" id="priorityRemovePhotoBtn">Remove photo</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="checkbox-container">
                 <input type="checkbox" id="priorityConsent" required>
                 <span class="custom-checkbox"></span>
-                <span class="checkbox-label-text">I confirm this is a genuine medical emergency requiring immediate attention</span>
+                <span class="checkbox-label-text">I confirm this is a genuine medical emergency requiring immediate
+                  attention</span>
               </label>
             </div>
             <button type="submit" class="btn btn-urgent btn-full" id="confirmPriorityBtn">
               &#128680; Activate Emergency Priority Access
             </button>
           </form>
+
           <div class="priority-result hidden" id="priorityResult">
             <div class="priority-success-anim">
               <div class="priority-success-icon">&#10003;</div>
               <h3>Priority Access Activated!</h3>
               <p id="priorityResultMsg">You've been moved to position 2. Estimated wait: 2 minutes.</p>
               <div class="priority-token-display" id="priorityNewToken">A-24</div>
-              <button class="btn btn-ghost" id="priorityBackAfterSuccess" style="margin-top:1rem;">Back to Dashboard</button>
+              <button class="btn btn-ghost" id="priorityBackAfterSuccess" style="margin-top:1rem;">Back to
+                Dashboard</button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PHOTO LIGHTBOX VIEWER -->
+  <div class="modal-backdrop" id="photoViewModal">
+    <div class="modal-dialog photo-dialog" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="closePhotoModal" aria-label="Close photo">&#10005;</button>
+      <div class="modal-header">
+        <div class="modal-badge">Emergency Attachment</div>
+        <h3 class="modal-title" id="photoModalTitle">Patient Supporting Image</h3>
+      </div>
+      <div class="photo-modal-body">
+        <img src="" id="photoModalImg" alt="Emergency submission upload" class="photo-modal-img">
+        <p class="photo-modal-desc" id="photoModalDesc">Uploaded supporting image for triage assessment.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="closePhotoModalBtn">Close Viewer</button>
       </div>
     </div>
   </div>
@@ -635,7 +963,8 @@
         </div>
         <div class="modal-badge" style="margin:1rem auto;">Token Generated!</div>
         <h3 class="modal-title" id="successTokenDisplay">Your Token: A-28</h3>
-        <p class="modal-subtitle" id="successMessage">Successfully joined the queue. You'll receive an SMS alert when it's almost your turn.</p>
+        <p class="modal-subtitle" id="successMessage">Successfully joined the queue. You'll receive an SMS alert when
+          it's almost your turn.</p>
         <div class="success-details" id="successDetails"></div>
         <div class="modal-actions" style="justify-content:center;">
           <button class="btn btn-primary" id="successViewQueueBtn">View Live Queue</button>
@@ -656,15 +985,18 @@
       <div class="help-content">
         <div class="help-item">
           <h4>&#127915; How is wait time calculated?</h4>
-          <p>The system computes dynamic wait times based on average consultation durations per department, active doctors on duty, and real-time pace.</p>
+          <p>The system computes dynamic wait times based on average consultation durations per department, active
+            doctors on duty, and real-time pace.</p>
         </div>
         <div class="help-item">
           <h4>&#128680; How does Priority Triage work?</h4>
-          <p>Urgent requests are verified through clinical guidelines and re-slotted near the front of the queue without cancelling other patients.</p>
+          <p>Urgent requests are verified through clinical guidelines and re-slotted near the front of the queue without
+            cancelling other patients.</p>
         </div>
         <div class="help-item">
           <h4>&#9201; What if I miss my token number?</h4>
-          <p>No penalty! Simply tap <strong>In 30 min</strong>, <strong>In 2 hrs</strong>, or <strong>Tomorrow</strong> to preserve your place with minimal wait.</p>
+          <p>No penalty! Simply tap <strong>In 30 min</strong>, <strong>In 2 hrs</strong>, or <strong>Tomorrow</strong>
+            to preserve your place with minimal wait.</p>
         </div>
       </div>
       <div class="modal-actions">

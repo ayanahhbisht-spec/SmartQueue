@@ -22,6 +22,10 @@ instance/
 .DS_Store
 Thumbs.db
 
+# Secrets & Uploads
+.env
+uploads/
+
 # IDE
 .vscode/
 .idea/
